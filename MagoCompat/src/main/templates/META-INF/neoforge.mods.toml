@@ -1,0 +1,52 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="Balvenie"
+
+description='''
+Mago modpack compatibility patches.
+
+Includes compatibility and balance patches for
+T.O Magic 'n Extras, Cataclysm Spellbooks,
+Iron's Spells 'n Spellbooks, and other Mago systems.
+'''
+
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+
+[[dependencies.${mod_id}]]
+modId="neoforge"
+type="required"
+versionRange="[${neo_version},)"
+ordering="NONE"
+side="BOTH"
+
+
+[[dependencies.${mod_id}]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"
+
+
+[[dependencies.${mod_id}]]
+modId="traveloptics"
+type="required"
+versionRange="[0,)"
+ordering="AFTER"
+side="BOTH"
+
+
+[[dependencies.${mod_id}]]
+modId="cataclysm_spellbooks"
+type="required"
+versionRange="[0,)"
+ordering="AFTER"
+side="BOTH"
