@@ -63,8 +63,28 @@ public final class MagoSpellPolicy {
     private static final Set<String> DISABLED_SPELLS =
             new HashSet<>();
 
+    private static final Set<ResourceLocation> HIDDEN_SCHOOLS =
+            new HashSet<>();
+
 
     static {
+
+        hideSchools(
+                // Retired / merged schools
+                "irons_spellbooks:blood",
+                "cataclysm_spellbooks:sand",
+                "somakespells:aqua",
+                "iss_magicfromtheeast:symmetry",
+                "hazentouvelib:shadow",
+                "hazentouvelib:radiance",
+                "asterismarcanum:astral",
+                "legendary_spellbooks:annihilation",
+
+                // Empty duplicate / legacy schools
+                "iss_magicfromtheeast:dune",
+                "aces_spell_utils:ritual",
+                "aces_spell_utils:technomancy"
+        );
 
         // =====================================================
         // Geo
@@ -506,6 +526,13 @@ public final class MagoSpellPolicy {
     }
 
 
+    public static boolean isHiddenSchool(
+            ResourceLocation schoolId
+    ) {
+        return HIDDEN_SCHOOLS.contains(schoolId);
+    }
+
+
     public static int getSchoolOverrideCount() {
         return SCHOOL_OVERRIDES.size();
     }
@@ -560,6 +587,25 @@ public final class MagoSpellPolicy {
     ) {
         for (String spellId : spellIds) {
             DISABLED_SPELLS.add(spellId);
+        }
+    }
+
+
+    private static void hideSchools(
+            String... schoolIds
+    ) {
+        for (String schoolId : schoolIds) {
+
+            ResourceLocation parsed =
+                    ResourceLocation.tryParse(schoolId);
+
+            if (parsed == null) {
+                throw new IllegalArgumentException(
+                        "Invalid hidden school id: " + schoolId
+                );
+            }
+
+            HIDDEN_SCHOOLS.add(parsed);
         }
     }
 }

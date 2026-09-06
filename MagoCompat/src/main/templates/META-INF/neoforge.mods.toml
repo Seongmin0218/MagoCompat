@@ -8,8 +8,7 @@ version="${mod_version}"
 displayName="${mod_name}"
 authors="Balvenie"
 
-description='''
-Mago modpack compatibility patches.
+description='''Mago modpack compatibility patches.
 
 Includes compatibility and balance patches for
 T.O Magic 'n Extras, Cataclysm Spellbooks,
@@ -51,9 +50,18 @@ versionRange="[0,)"
 ordering="AFTER"
 side="BOTH"
 
+
 [[dependencies.${mod_id}]]
 modId="irons_spellbooks"
 type="required"
 versionRange="[0,)"
 ordering="AFTER"
 side="BOTH"
+
+
+[[dependencies.${mod_id}]]
+modId="jei"
+type="optional"
+versionRange="[19.27.0.336,)"
+ordering="AFTER"
+side="CLIENT"
