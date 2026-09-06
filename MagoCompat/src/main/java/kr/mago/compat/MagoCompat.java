@@ -13,6 +13,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import org.slf4j.Logger;
 
+import kr.mago.compat.spell.MagoSpellEvents;
+
 @Mod(MagoCompat.MOD_ID)
 public final class MagoCompat {
 
@@ -36,16 +38,18 @@ public final class MagoCompat {
 
     private static boolean loggedWraithbladeAttributePatch = false;
 
-    public MagoCompat(IEventBus modEventBus) {
+        public MagoCompat(IEventBus modEventBus) {
 
         NeoForge.EVENT_BUS.addListener(
                 MagoCompat::onItemAttributeModifiers
         );
 
+        MagoSpellEvents.register();
+
         LOGGER.info(
                 "[MagoCompat] Mago compatibility patches loaded."
         );
-    }
+        }
 
     /**
      * Adds Mago's Technomancy bonus to the Mechanized Wraithblade.
