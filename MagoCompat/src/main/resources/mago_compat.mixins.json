@@ -4,6 +4,9 @@
   "package": "kr.mago.compat.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
+  "client": [
+    "EldritchResearchScreenMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
