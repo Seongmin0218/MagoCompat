@@ -30,6 +30,11 @@ repositories {
     }
 
     maven {
+        name = "Curios"
+        url = uri("https://maven.theillusivec4.top")
+    }
+
+    maven {
         name = "BlameJared"
         url = uri("https://maven.blamejared.com")
         content {
@@ -37,7 +42,6 @@ repositories {
         }
     }
 }
-
 base {
     archivesName = mod_id
 }
@@ -99,6 +103,10 @@ dependencies {
 
     localRuntime "io.redspace:irons_spellbooks:${irons_spells_version}"
     localRuntime "io.redspace:irons_lib:${irons_lib_version}"
+
+    // Curios API
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}"
+    localRuntime "top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}"
 
     // JEI API: compile-time only. The real modpack already supplies JEI.
     compileOnly "mezz.jei:jei-1.21.1-common-api:${jei_version}"

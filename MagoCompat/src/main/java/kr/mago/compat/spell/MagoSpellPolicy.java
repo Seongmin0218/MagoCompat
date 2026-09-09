@@ -37,8 +37,8 @@ public final class MagoSpellPolicy {
     private static final ResourceLocation TECHNOMANCY =
             id("cataclysm_spellbooks", "technomancy");
 
-    private static final ResourceLocation PRISMATIC =
-            id("crystal_chronicles", "prismatic");
+    private static final ResourceLocation RADIANCE =
+            id("hazentouvelib", "radiance");
 
     private static final ResourceLocation ABYSSAL =
             id("cataclysm_spellbooks", "abyssal");
@@ -76,7 +76,7 @@ public final class MagoSpellPolicy {
                 "somakespells:aqua",
                 "iss_magicfromtheeast:symmetry",
                 "hazentouvelib:shadow",
-                "hazentouvelib:radiance",
+                "crystal_chronicles:prismatic",
                 "asterismarcanum:astral",
                 "legendary_spellbooks:annihilation",
 
@@ -307,21 +307,24 @@ public final class MagoSpellPolicy {
 
 
         // =====================================================
-        // Prismatic
+        // Radiance
+        //
+        // Prismatic is retired and merged into Radiance.
+        // Radiance retains its Upgrade Orb / Rune growth system.
         // =====================================================
 
         move(
-                PRISMATIC,
+                RADIANCE,
 
-                // Radiance -> Prismatic
+                // Existing Radiance spells
                 "hazennstuff:terraprismic_barrage",
                 "hazennstuff:call_forth_terraprisma",
                 "hazennstuff:prismatic_shift",
 
-                // Summon -> Prismatic
+                // Summon -> Radiance
                 "hazennstuff:spectral_axe",
 
-                // Astral -> Prismatic
+                // Astral -> Radiance
                 "asterismarcanum:silvery_barbs",
                 "asterismarcanum:brightburst",
                 "asterismarcanum:celestial_tether",
@@ -329,7 +332,7 @@ public final class MagoSpellPolicy {
                 "asterismarcanum:astral_echo",
                 "asterismarcanum:piercing_light",
 
-                // Holy -> Prismatic
+                // Holy -> Radiance
                 // GTBC version retained.
                 "gametechbcs_spellbooks:nullflare"
         );
@@ -444,7 +447,7 @@ public final class MagoSpellPolicy {
         // =====================================================
 
         disable(
-                // Prismatic
+                // Retired Prismatic
                 "crystal_chronicles:prismatic_portal",
 
                 // Occult
@@ -502,7 +505,7 @@ public final class MagoSpellPolicy {
                 "traveloptics:sword_of_the_ancients",
 
                 // Nullflare duplicate:
-                // GTBC kept and moved to Prismatic.
+                // GTBC kept and moved to Radiance.
                 "traveloptics:nullflare"
         );
     }
