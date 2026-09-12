@@ -8,6 +8,9 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.neoforged.neoforge.common.NeoForge;
 import top.theillusivec4.curios.api.event.CurioAttributeModifierEvent;
+import java.util.HashSet;
+import java.util.Collection;
+import java.util.Set;
 
 public final class MagoCurioAttributeEvents {
 
@@ -32,6 +35,22 @@ public final class MagoCurioAttributeEvents {
                     "cataclysm_spellbooks",
                     "desert_spell_book"
             );
+
+        private static final ResourceLocation VAMPIRIC_SPELL_BOOK =
+        id(
+                "irons_spellbooks",
+                "cursed_doll_spell_book"
+        );
+
+        // =========================================================
+        // Somake
+        // =========================================================
+
+        private static final ResourceLocation VOIDBOUND_CODEX_3 =
+                id(
+                        "somakespells",
+                        "voidbound_codex_3_spell_book"
+                );
 
 
     // =========================================================
@@ -80,6 +99,30 @@ public final class MagoCurioAttributeEvents {
                     "geo_spell_power"
             );
 
+        private static final ResourceLocation BLOOD_SPELL_POWER =
+        id(
+                "irons_spellbooks",
+                "blood_spell_power"
+        );
+
+        private static final ResourceLocation RITUAL_SPELL_POWER =
+                id(
+                        "aces_spell_utils",
+                        "ritual_spell_power"
+                );
+
+        private static final ResourceLocation AQUA_SPELL_POWER =
+        id(
+                "somakespells",
+                "aqua_spell_power"
+        );
+
+        private static final ResourceLocation HYDRO_SPELL_POWER =
+                id(
+                        "aces_spell_utils",
+                        "hydro_spell_power"
+                );
+
 
     // =========================================================
     // Mago modifier IDs
@@ -103,6 +146,12 @@ public final class MagoCurioAttributeEvents {
                     "desert_spell_book_geo_spell_power"
             );
 
+        private static final ResourceLocation VAMPIRIC_BOOK_RITUAL_MODIFIER =
+        id(
+                MagoCompat.MOD_ID,
+                "vampiric_spell_book_ritual_spell_power"
+        );
+
 
     // =========================================================
     // Logging
@@ -111,7 +160,9 @@ public final class MagoCurioAttributeEvents {
     private static boolean loggedArchivePatch = false;
     private static boolean loggedFirelordPatch = false;
     private static boolean loggedDesertSpellBookPatch = false;
-
+        private static boolean loggedVampiricSpellBookPatch = false;
+        private static final Set<ResourceLocation> LOGGED_SOMAKE_CURIO_ITEMS =
+        new HashSet<>();
 
     private MagoCurioAttributeEvents() {
     }
@@ -132,6 +183,15 @@ public final class MagoCurioAttributeEvents {
                         event.getItemStack().getItem()
                 );
 
+        if ("somakespells".equals(itemId.getNamespace())) {
+        patchSomakeCurioAttributes(
+                event,
+                itemId
+        );
+
+        return;
+        }
+
         if (ARCHIVE_OF_ABYSSAL_SECRETS.equals(itemId)) {
             patchArchiveOfAbyssalSecrets(event);
             return;
@@ -143,7 +203,12 @@ public final class MagoCurioAttributeEvents {
         }
 
         if (DESERT_SPELL_BOOK.equals(itemId)) {
-            patchDesertSpellBook(event);
+        patchDesertSpellBook(event);
+        return;
+        }
+
+        if (VAMPIRIC_SPELL_BOOK.equals(itemId)) {
+        patchVampiricSpellBook(event);
         }
     }
 
@@ -296,6 +361,151 @@ public final class MagoCurioAttributeEvents {
         }
     }
 
+        /**
+         * Vampiric Spell Book
+         *
+         * Old:
+         * +10% Blood Spell Power
+         * +10% Spell Resist
+         * +200 Max Mana
+         *
+         * Mago:
+         * +10% Occult / Ritual Spell Power
+         * +10% Spell Resist remains
+         * +200 Max Mana remains
+         */
+        private static void patchVampiricSpellBook(
+                CurioAttributeModifierEvent event
+        ) {
+        Holder<Attribute> blood =
+                requireAttribute(
+                        BLOOD_SPELL_POWER
+                );
+
+        Holder<Attribute> ritual =
+                requireAttribute(
+                        RITUAL_SPELL_POWER
+                );
+
+        event.removeAttribute(blood);
+
+        event.addModifier(
+                ritual,
+                new AttributeModifier(
+                        VAMPIRIC_BOOK_RITUAL_MODIFIER,
+                        0.10D,
+                        AttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                )
+        );
+
+        if (!loggedVampiricSpellBookPatch) {
+                loggedVampiricSpellBookPatch = true;
+
+                MagoCompat.LOGGER.info(
+                        "[MagoCompat] Vampiric Spell Book patched. "
+                                + "Removed Blood Spell Power | "
+                                + "Added Occult/Ritual Spell Power +10%"
+                );
+        }
+        }
+
+        private static void patchSomakeCurioAttributes(
+        CurioAttributeModifierEvent event,
+        ResourceLocation itemId
+) {
+    int bloodMigrated =
+            migrateCurioAttribute(
+                    event,
+                    BLOOD_SPELL_POWER,
+                    RITUAL_SPELL_POWER
+            );
+
+    int aquaMigrated =
+            migrateCurioAttribute(
+                    event,
+                    AQUA_SPELL_POWER,
+                    HYDRO_SPELL_POWER
+            );
+
+    int enderMigrated = 0;
+
+    if (VOIDBOUND_CODEX_3.equals(itemId)) {
+        enderMigrated =
+                migrateCurioAttribute(
+                        event,
+                        ENDER_SPELL_POWER,
+                        ABYSSAL_SPELL_POWER
+                );
+    }
+
+    if (bloodMigrated == 0
+            && aquaMigrated == 0
+            && enderMigrated == 0) {
+        return;
+    }
+
+    if (LOGGED_SOMAKE_CURIO_ITEMS.add(itemId)) {
+        MagoCompat.LOGGER.info(
+                "[MagoCompat] Somake Curio patch active. "
+                        + "Item: {} | Blood->Occult: {} | "
+                        + "Aqua->Hydro: {} | Ender->Abyssal: {}",
+                itemId,
+                bloodMigrated,
+                aquaMigrated,
+                enderMigrated
+        );
+    }
+}
+
+
+        private static int migrateCurioAttribute(
+                CurioAttributeModifierEvent event,
+                ResourceLocation sourceAttributeId,
+                ResourceLocation targetAttributeId
+        ) {
+        Holder<Attribute> source =
+                requireAttribute(
+                        sourceAttributeId
+                );
+
+        Holder<Attribute> target =
+                requireAttribute(
+                        targetAttributeId
+                );
+
+        /*
+        * Curios 9.5.1 API:
+        *
+        * removeAttribute() returns the modifiers which were removed.
+        * We can therefore migrate the actual modifier values without
+        * guessing IDs, amounts or operations.
+        */
+        Collection<AttributeModifier> removedModifiers =
+                event.removeAttribute(
+                        source
+                );
+
+        if (removedModifiers.isEmpty()) {
+                return 0;
+        }
+
+        int migrated = 0;
+
+        for (AttributeModifier oldModifier : removedModifiers) {
+                event.addModifier(
+                        target,
+                        new AttributeModifier(
+                                oldModifier.id(),
+                                oldModifier.amount(),
+                                oldModifier.operation()
+                        )
+                );
+
+                migrated++;
+        }
+
+        return migrated;
+        }
 
     private static Holder<Attribute> requireAttribute(
             ResourceLocation attributeId

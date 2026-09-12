@@ -16,6 +16,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import org.slf4j.Logger;
 import kr.mago.compat.item.MagoRetiredItemPolicy;
+import kr.mago.compat.effect.MagoMobEffectPatches;
 
 @Mod(MagoCompat.MOD_ID)
 public final class MagoCompat {
@@ -52,6 +53,8 @@ public final class MagoCompat {
         MagoItemAttributeEvents.register();
 
         MagoRetiredItemPolicy.register(modEventBus);
+
+        MagoMobEffectPatches.register(modEventBus);
 
         MagoSpellEvents.register();
 

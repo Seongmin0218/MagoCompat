@@ -87,10 +87,153 @@ public final class MagoItemAttributeEvents {
             );
 
         private static final ResourceLocation MURAMASA =
+        id(
+                "iss_magicfromtheeast",
+                "muramasa"
+        );
+
+        // =========================================================
+        // Discerning The Eldritch
+        // =========================================================
+
+        private static final ResourceLocation DTE_CATACLYSM =
                 id(
-                        "iss_magicfromtheeast",
-                        "muramasa"
+                        "discerning_the_eldritch",
+                        "cataclysm"
                 );
+
+        private static final ResourceLocation DTE_DEVOURER =
+                id(
+                        "discerning_the_eldritch",
+                        "devourer"
+                );
+
+        private static final ResourceLocation DTE_MOURNING_STAR =
+                id(
+                        "discerning_the_eldritch",
+                        "mourning_star"
+                );
+
+        private static final ResourceLocation DTE_CATACLYSM_AWAKENED =
+                id(
+                        "discerning_the_eldritch",
+                        "cataclysm_awakened"
+                );
+
+        private static final ResourceLocation DTE_DEVOURER_AWAKENED =
+                id(
+                        "discerning_the_eldritch",
+                        "devourer_awakened"
+                );
+
+        private static final ResourceLocation DTE_MOURNING_STAR_AWAKENED =
+                id(
+                        "discerning_the_eldritch",
+                        "mourning_star_awakened"
+                );
+
+        // =========================================================
+        // Hazen N Stuff
+        // =========================================================
+
+        private static final ResourceLocation VAMPIRE_KNIVES =
+                id(
+                        "hazennstuff",
+                        "vampire_knives"
+                );
+
+        private static final ResourceLocation BLOOD_STAFF =
+                id(
+                        "irons_spellbooks",
+                        "blood_staff"
+                );
+
+        // =========================================================
+        // Crystal Chronicles
+        // =========================================================
+
+        private static final ResourceLocation SANGUINE_EDGE =
+                id(
+                        "crystal_chronicles",
+                        "blood_scythe"
+                );
+
+        // =========================================================
+        // Somake
+        // =========================================================
+
+        private static final ResourceLocation ABYSSIUM_HELMET =
+                id(
+                        "somakespells",
+                        "abyssium_helmet"
+                );
+
+        private static final ResourceLocation ABYSSIUM_CHESTPLATE =
+                id(
+                        "somakespells",
+                        "abyssium_chestplate"
+                );
+
+        private static final ResourceLocation ABYSSIUM_LEGGINGS =
+                id(
+                        "somakespells",
+                        "abyssium_leggings"
+                );
+
+        private static final ResourceLocation ABYSSIUM_BOOTS =
+                id(
+                        "somakespells",
+                        "abyssium_boots"
+                );
+
+        private static final ResourceLocation SHADOW_SCALE_HELMET =
+                id(
+                        "hazennstuff",
+                        "shadow_scale_helmet"
+                );
+
+        private static final ResourceLocation SHADOW_SCALE_CHESTPLATE =
+                id(
+                        "hazennstuff",
+                        "shadow_scale_chestplate"
+                );
+
+        private static final ResourceLocation SHADOW_SCALE_LEGGINGS =
+                id(
+                        "hazennstuff",
+                        "shadow_scale_leggings"
+                );
+
+        private static final ResourceLocation SHADOW_SCALE_BOOTS =
+                id(
+                        "hazennstuff",
+                        "shadow_scale_boots"
+                );
+
+        private static final ResourceLocation SHADOW_JESTER_HELMET =
+                id(
+                        "hazennstuff",
+                        "shadow_jester_helmet"
+                );
+
+        private static final ResourceLocation SHADOW_JESTER_CHESTPLATE =
+                id(
+                        "hazennstuff",
+                        "shadow_jester_chestplate"
+                );
+
+        private static final ResourceLocation SHADOW_JESTER_LEGGINGS =
+                id(
+                        "hazennstuff",
+                        "shadow_jester_leggings"
+                );
+
+        private static final ResourceLocation SHADOW_JESTER_BOOTS =
+                id(
+                        "hazennstuff",
+                        "shadow_jester_boots"
+                );
+
 
     // =========================================================
     // Attributes
@@ -138,6 +281,35 @@ public final class MagoItemAttributeEvents {
                         "ritual_spell_power"
                 );
 
+        private static final ResourceLocation AQUA_SPELL_POWER =
+        id(
+                "somakespells",
+                "aqua_spell_power"
+        );
+
+        private static final ResourceLocation HYDRO_SPELL_POWER =
+                id(
+                        "aces_spell_utils",
+                        "hydro_spell_power"
+                );
+
+        private static final ResourceLocation ENDER_SPELL_POWER =
+                id(
+                        "irons_spellbooks",
+                        "ender_spell_power"
+                );
+
+        private static final ResourceLocation ABYSSAL_SPELL_POWER =
+                id(
+                        "cataclysm_spellbooks",
+                        "abyssal_spell_power"
+                );
+
+        private static final ResourceLocation SHADOW_SPELL_POWER =
+        id(
+                "hazentouvelib",
+                "shadow_spell_power"
+        );
 
     // =========================================================
     // Logging
@@ -215,18 +387,122 @@ public final class MagoItemAttributeEvents {
         }
 
         if (FAKE_WUDJETS_STAFF.equals(itemId)) {
-            patchFakeWudjetsStaff(
-                    event,
-                    itemId
-            );
-            return;
+        patchFakeWudjetsStaff(
+                event,
+                itemId
+        );
+        return;
         }
 
 
         // ---------------------------------------------------------
-        // L_Ender's Cataclysm
+        // ISS: Magic From The East
         // ---------------------------------------------------------
 
+        // ---------------------------------------------------------
+        // Blood -> Occult weapon migrations
+        // ---------------------------------------------------------
+
+        if (MURAMASA.equals(itemId)
+                || ROTTEN_SICKLE.equals(itemId)
+                || WHISPERING_HARVESTER.equals(itemId)
+                || SCYTHE_OF_ROTTEN_DREAMS.equals(itemId)
+                || ARM_OF_DECAY.equals(itemId)
+                || VAMPIRE_KNIVES.equals(itemId)
+                || DTE_CATACLYSM.equals(itemId)
+                || DTE_DEVOURER.equals(itemId)
+                || DTE_MOURNING_STAR.equals(itemId)
+                || DTE_CATACLYSM_AWAKENED.equals(itemId)
+                || DTE_DEVOURER_AWAKENED.equals(itemId)
+                || DTE_MOURNING_STAR_AWAKENED.equals(itemId)
+                || BLOOD_STAFF.equals(itemId)
+                || SANGUINE_EDGE.equals(itemId)
+                ) {
+
+        patchBloodWeaponToRitual(
+                event,
+                itemId
+        );
+
+        return;
+        }
+
+        // ---------------------------------------------------------
+        // Somake school consolidation
+        // ---------------------------------------------------------
+
+        if ("somakespells".equals(itemId.getNamespace())) {
+
+        int bloodMigrated =
+                migrateItemAttribute(
+                        event,
+                        BLOOD_SPELL_POWER,
+                        RITUAL_SPELL_POWER
+                );
+
+        int aquaMigrated =
+                migrateItemAttribute(
+                        event,
+                        AQUA_SPELL_POWER,
+                        HYDRO_SPELL_POWER
+                );
+
+        int enderMigrated = 0;
+
+        if (isAbyssiumArmor(itemId)) {
+                enderMigrated =
+                        migrateItemAttribute(
+                                event,
+                                ENDER_SPELL_POWER,
+                                ABYSSAL_SPELL_POWER
+                        );
+        }
+
+        if (bloodMigrated > 0
+                || aquaMigrated > 0
+                || enderMigrated > 0) {
+
+                logPatchOnce(
+                        itemId,
+                        "Somake school migration | "
+                                + "Blood->Occult: "
+                                + bloodMigrated
+                                + " | Aqua->Hydro: "
+                                + aquaMigrated
+                                + " | Ender->Abyssal: "
+                                + enderMigrated
+                );
+        }
+
+        return;
+        }
+
+        // ---------------------------------------------------------
+        // Hazen Shadow -> Abyssal armor migrations
+        // ---------------------------------------------------------
+
+        if (SHADOW_SCALE_HELMET.equals(itemId)
+                || SHADOW_SCALE_CHESTPLATE.equals(itemId)
+                || SHADOW_SCALE_LEGGINGS.equals(itemId)
+                || SHADOW_SCALE_BOOTS.equals(itemId)
+
+                || SHADOW_JESTER_HELMET.equals(itemId)
+                || SHADOW_JESTER_CHESTPLATE.equals(itemId)
+                || SHADOW_JESTER_LEGGINGS.equals(itemId)
+                || SHADOW_JESTER_BOOTS.equals(itemId)) {
+
+        patchShadowItemToAbyssal(
+                event,
+                itemId
+        );
+
+        return;
+        }
+
+        // ---------------------------------------------------------
+        // L_Ender's Cataclysm
+        // ---------------------------------------------------------
+                
         if (CURSIUM_HELMET.equals(itemId)
                 || CURSIUM_CHESTPLATE.equals(itemId)
                 || CURSIUM_LEGGINGS.equals(itemId)
@@ -508,19 +784,38 @@ public final class MagoItemAttributeEvents {
         }
     }
 
-/**
- * Muramasa
- *
- * Original:
- * +15% Blood Spell Power
- *
- * Mago:
- * +15% Occult (Ritual) Spell Power
- *
- * The original amount and operation are preserved rather
- * than hard-coding the value into the migration.
- */
-        private static void patchMuramasa(
+        /**
+         * Muramasa
+         *
+         * Original:
+         * Blood Spell Power
+         *
+         * Mago:
+         * Occult / Ritual Spell Power
+         *
+         * Preserve the actual amount, operation and slot
+         * from every Blood Spell Power entry on Muramasa.
+         */
+        /**
+         * Migrates all Blood Spell Power modifiers on the target weapon
+         * to Mago's Occult / Ritual Spell Power.
+         *
+         * Preserves:
+         * - modifier amount
+         * - operation
+         * - equipment slot
+         * - modifier ID
+         *
+         * Other attributes on the item are untouched.
+         *
+         * Used by:
+         * - ISS: Muramasa
+         * - ESS Requiem: Rotten Sickle
+         * - ESS Requiem: Whispering Harvester
+         * - ESS Requiem: Scythe of Rotten Dreams
+         * - ESS Requiem: Arm of Decay
+         */
+        private static void patchBloodWeaponToRitual(
                 ItemAttributeModifierEvent event,
                 ResourceLocation itemId
         ) {
@@ -534,72 +829,256 @@ public final class MagoItemAttributeEvents {
                         RITUAL_SPELL_POWER
                 );
 
-        ResourceLocation originalModifierId =
-                id(
-                        "irons_spellbooks",
-                        "mainhand_blood_spell_power_modifier"
-                );
-
-        ItemAttributeModifiers.Entry targetEntry = null;
+        List<ItemAttributeModifiers.Entry> bloodEntries =
+                new ArrayList<>();
 
         for (ItemAttributeModifiers.Entry entry : event.getModifiers()) {
-                if (!entry.attribute().equals(blood)) {
-                continue;
+                if (entry.attribute().equals(blood)) {
+                bloodEntries.add(entry);
                 }
-
-                if (!entry.modifier().id().equals(originalModifierId)) {
-                continue;
-                }
-
-                targetEntry = entry;
-                break;
         }
 
-        if (targetEntry == null) {
+        if (bloodEntries.isEmpty()) {
                 return;
         }
 
-        AttributeModifier oldModifier =
-                targetEntry.modifier();
+        int migrated = 0;
 
-        boolean removed =
-                event.removeModifier(
-                        blood,
-                        originalModifierId
-                );
+        for (ItemAttributeModifiers.Entry entry : bloodEntries) {
+                AttributeModifier oldModifier =
+                        entry.modifier();
 
-        if (!removed) {
-                return;
-        }
+                boolean removed =
+                        event.removeModifier(
+                                blood,
+                                oldModifier.id()
+                        );
 
-        boolean added =
-                event.addModifier(
-                        ritual,
-                        new AttributeModifier(
-                                id(
-                                        MagoCompat.MOD_ID,
-                                        "muramasa_ritual_spell_power"
+                if (!removed) {
+                continue;
+                }
+
+                boolean added =
+                        event.addModifier(
+                                ritual,
+                                new AttributeModifier(
+                                        oldModifier.id(),
+                                        oldModifier.amount(),
+                                        oldModifier.operation()
                                 ),
-                                oldModifier.amount(),
-                                oldModifier.operation()
-                        ),
-                        targetEntry.slot()
-                );
+                                entry.slot()
+                        );
 
-        if (added) {
+                if (added) {
+                migrated++;
+                }
+        }
+
+        if (migrated > 0) {
                 logPatchOnce(
                         itemId,
-                        "Migrated Blood Spell Power "
-                                + oldModifier.amount()
-                                + " to Occult/Ritual Spell Power"
+                        "Migrated "
+                                + migrated
+                                + " Blood Spell Power modifier(s) "
+                                + "to Occult/Ritual Spell Power"
                 );
         }
         }
 
+        // =========================================================
+        // Ender's Spells and Stuff: Requiem
+        // =========================================================
+
+        private static final ResourceLocation ROTTEN_SICKLE =
+                id(
+                        "ess_requiem",
+                        "rotten_sickle"
+                );
+
+        private static final ResourceLocation WHISPERING_HARVESTER =
+                id(
+                        "ess_requiem",
+                        "whispering_harvester"
+                );
+
+        private static final ResourceLocation SCYTHE_OF_ROTTEN_DREAMS =
+                id(
+                        "ess_requiem",
+                        "scythe_of_rotten_dreams"
+                );
+
+        private static final ResourceLocation ARM_OF_DECAY =
+                id(
+                        "ess_requiem",
+                        "arm_of_decay"
+                );
+
+        /**
+         * Migrates every modifier of one Attribute to another
+         * while preserving:
+         *
+         * - modifier ID
+         * - amount
+         * - operation
+         * - equipment slot/group
+         */
+        private static int migrateItemAttribute(
+                ItemAttributeModifierEvent event,
+                ResourceLocation sourceAttributeId,
+                ResourceLocation targetAttributeId
+        ) {
+        Holder<Attribute> source =
+                requireAttribute(
+                        sourceAttributeId
+                );
+
+        Holder<Attribute> target =
+                requireAttribute(
+                        targetAttributeId
+                );
+
+        List<ItemAttributeModifiers.Entry> entries =
+                new ArrayList<>();
+
+        for (ItemAttributeModifiers.Entry entry : event.getModifiers()) {
+                if (entry.attribute().equals(source)) {
+                entries.add(entry);
+                }
+        }
+
+        if (entries.isEmpty()) {
+                return 0;
+        }
+
+        int migrated = 0;
+
+        for (ItemAttributeModifiers.Entry entry : entries) {
+                AttributeModifier oldModifier =
+                        entry.modifier();
+
+                boolean removed =
+                        event.removeModifier(
+                                source,
+                                oldModifier.id()
+                        );
+
+                if (!removed) {
+                continue;
+                }
+
+                boolean added =
+                        event.addModifier(
+                                target,
+                                new AttributeModifier(
+                                        oldModifier.id(),
+                                        oldModifier.amount(),
+                                        oldModifier.operation()
+                                ),
+                                entry.slot()
+                        );
+
+                if (added) {
+                migrated++;
+                }
+        }
+
+        return migrated;
+        }
+
+        private static boolean isAbyssiumArmor(
+                ResourceLocation itemId
+        ) {
+        return ABYSSIUM_HELMET.equals(itemId)
+                || ABYSSIUM_CHESTPLATE.equals(itemId)
+                || ABYSSIUM_LEGGINGS.equals(itemId)
+                || ABYSSIUM_BOOTS.equals(itemId);
+        }
 
     // =========================================================
     // Helpers
     // =========================================================
+
+    /**
+         * Migrates all Shadow Spell Power modifiers on the target item
+         * to Mago's Abyssal Spell Power.
+         *
+         * Preserves:
+         * - modifier amount
+         * - operation
+         * - equipment slot
+         * - modifier ID
+         *
+         * Other attributes remain untouched.
+         */
+        private static void patchShadowItemToAbyssal(
+                ItemAttributeModifierEvent event,
+                ResourceLocation itemId
+        ) {
+        Holder<Attribute> shadow =
+                requireAttribute(
+                        SHADOW_SPELL_POWER
+                );
+
+        Holder<Attribute> abyssal =
+                requireAttribute(
+                        ABYSSAL_SPELL_POWER
+                );
+
+        List<ItemAttributeModifiers.Entry> shadowEntries =
+                new ArrayList<>();
+
+        for (ItemAttributeModifiers.Entry entry : event.getModifiers()) {
+                if (entry.attribute().equals(shadow)) {
+                shadowEntries.add(entry);
+                }
+        }
+
+        if (shadowEntries.isEmpty()) {
+                return;
+        }
+
+        int migrated = 0;
+
+        for (ItemAttributeModifiers.Entry entry : shadowEntries) {
+                AttributeModifier oldModifier =
+                        entry.modifier();
+
+                boolean removed =
+                        event.removeModifier(
+                                shadow,
+                                oldModifier.id()
+                        );
+
+                if (!removed) {
+                continue;
+                }
+
+                boolean added =
+                        event.addModifier(
+                                abyssal,
+                                new AttributeModifier(
+                                        oldModifier.id(),
+                                        oldModifier.amount(),
+                                        oldModifier.operation()
+                                ),
+                                entry.slot()
+                        );
+
+                if (added) {
+                migrated++;
+                }
+        }
+
+        if (migrated > 0) {
+                logPatchOnce(
+                        itemId,
+                        "Migrated "
+                                + migrated
+                                + " Shadow Spell Power modifier(s) "
+                                + "to Abyssal Spell Power"
+                );
+        }
+        }
 
     private static void logPatchOnce(
             ResourceLocation itemId,
