@@ -107,7 +107,7 @@ public final class MagoCurioAttributeEvents {
 
         private static final ResourceLocation RITUAL_SPELL_POWER =
                 id(
-                        "aces_spell_utils",
+                        "discerning_the_eldritch",
                         "ritual_spell_power"
                 );
 
