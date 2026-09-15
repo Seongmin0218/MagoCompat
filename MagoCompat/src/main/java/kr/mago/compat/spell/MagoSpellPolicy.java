@@ -377,6 +377,10 @@ public final class MagoSpellPolicy {
                 "apprenticecodex:moon_light",
                 "irons_spellbooks:pocket_dimension",
 
+                // Holy -> Cosmic
+                "apprenticecodex:illuminate_stellar",
+                "apprenticecodex:unite_luna",
+
                 // Astral -> Cosmic
                 "asterismarcanum:starfire",
                 "asterismarcanum:star_swarm",

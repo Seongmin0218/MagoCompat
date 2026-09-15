@@ -159,6 +159,22 @@ public final class MagoItemAttributeEvents {
                 );
 
         // =========================================================
+        // Apprentice Codex
+        // =========================================================
+
+        private static final ResourceLocation ILLUMINATE_STELLAR_STAFF =
+                id(
+                        "apprenticecodex",
+                        "illuminate_stellar_staff"
+                );
+
+        private static final ResourceLocation UNITE_LUNA_STAFF =
+                id(
+                        "apprenticecodex",
+                        "unite_luna_staff"
+                );
+
+        // =========================================================
         // Somake
         // =========================================================
 
@@ -423,6 +439,31 @@ public final class MagoItemAttributeEvents {
                 event,
                 itemId
         );
+
+        return;
+        }
+
+        // ---------------------------------------------------------
+        // Apprentice Codex Holy -> Cosmic staff migrations
+        // ---------------------------------------------------------
+
+        if (ILLUMINATE_STELLAR_STAFF.equals(itemId)
+                || UNITE_LUNA_STAFF.equals(itemId)) {
+
+        int holyMigrated =
+                migrateItemAttribute(
+                        event,
+                        HOLY_SPELL_POWER,
+                        COSMIC_SPELL_POWER
+                );
+
+        if (holyMigrated > 0) {
+                logPatchOnce(
+                        itemId,
+                        "Apprentice Codex Holy->Cosmic staff migration: "
+                                + holyMigrated
+                );
+        }
 
         return;
         }
