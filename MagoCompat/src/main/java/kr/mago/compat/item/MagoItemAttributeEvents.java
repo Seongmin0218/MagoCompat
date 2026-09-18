@@ -321,6 +321,12 @@ public final class MagoItemAttributeEvents {
                         "abyssal_spell_power"
                 );
 
+        private static final ResourceLocation COSMIC_SPELL_POWER =
+        id(
+                "hazentouvelib",
+                "cosmic_spell_power"
+        );
+
         private static final ResourceLocation SHADOW_SPELL_POWER =
         id(
                 "hazentouvelib",

@@ -5,10 +5,13 @@ import io.redspace.ironsspellbooks.api.config.SpellConfigParameter;
 import io.redspace.ironsspellbooks.api.events.SpellPreCastEvent;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
+import io.redspace.ironsspellbooks.network.casting.OnCastFinishedPacket;
 import kr.mago.compat.MagoCompat;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public final class MagoSpellEvents {
 
@@ -28,24 +31,12 @@ public final class MagoSpellEvents {
         registered = true;
 
 
-        /*
-         * Run last.
-         *
-         * Several Iron's addons also modify default spell schools.
-         * Mago is the final modpack-level policy layer.
-         */
         NeoForge.EVENT_BUS.addListener(
                 EventPriority.LOWEST,
                 MagoSpellEvents::onModifyDefaultConfigValues
         );
 
 
-        /*
-         * Hard cast block for deleted spells.
-         *
-         * enabled=false alone is not enough because an already existing
-         * scroll may still attempt to cast the spell.
-         */
         NeoForge.EVENT_BUS.addListener(
                 EventPriority.HIGHEST,
                 MagoSpellEvents::onSpellPreCast
@@ -68,10 +59,6 @@ public final class MagoSpellEvents {
         String spellId =
                 event.getSpell().getSpellId();
 
-
-        // =====================================================
-        // School override
-        // =====================================================
 
         ResourceLocation targetSchoolId =
                 MagoSpellPolicy.getTargetSchool(
@@ -106,10 +93,6 @@ public final class MagoSpellEvents {
         }
 
 
-        // =====================================================
-        // Deleted spell
-        // =====================================================
-
         if (
                 MagoSpellPolicy.isDisabled(
                         spellId
@@ -133,15 +116,91 @@ public final class MagoSpellEvents {
             SpellPreCastEvent event
     ) {
 
+        /*
+         * Existing deleted-spell hard block.
+         */
         if (
-                !MagoSpellPolicy.isDisabled(
+                MagoSpellPolicy.isDisabled(
                         event.getSpellId()
                 )
         ) {
+
+            cancelCastAndResetClient(event);
             return;
         }
 
 
+        /*
+         * Mago basic Mage school / rarity gate.
+         */
+        var gateResult =
+                MagoMageGatePolicy.check(
+                        event.getEntity(),
+                        event.getSpellId(),
+                        event.getSpellLevel(),
+                        event.getSchoolType()
+                );
+
+
+        if (gateResult.allowed()) {
+            return;
+        }
+
+
+        cancelCastAndResetClient(event);
+
+
+        /*
+         * Action-bar feedback only from the server side.
+         */
+        if (
+                !event.getEntity()
+                        .level()
+                        .isClientSide()
+        ) {
+
+            event.getEntity()
+                    .displayClientMessage(
+                            gateResult.message(),
+                            true
+                    );
+        }
+    }
+
+
+    /**
+     * Cancel the actual server-side cast and also execute
+     * Iron's normal client-side cancellation cleanup.
+     *
+     * Targeted spells may already have sent SyncTargetingDataPacket
+     * before SpellPreCastEvent is denied. If we only cancel the event,
+     * ClientMagicData.spellTargetingData remains and the target marker
+     * can stay rendered indefinitely.
+     *
+     * OnCastFinishedPacket(cancelled=true) calls
+     * ClientMagicData.resetClientCastState(), which also clears
+     * targeting data and stops the item-use/cast state.
+     */
+    private static void cancelCastAndResetClient(
+            SpellPreCastEvent event
+    ) {
+
         event.setCanceled(true);
+
+
+        if (
+                event.getEntity()
+                        instanceof ServerPlayer serverPlayer
+        ) {
+
+            PacketDistributor.sendToPlayer(
+                    serverPlayer,
+                    new OnCastFinishedPacket(
+                            serverPlayer.getUUID(),
+                            event.getSpellId(),
+                            true
+                    )
+            );
+        }
     }
 }
