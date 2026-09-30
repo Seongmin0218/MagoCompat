@@ -5,7 +5,11 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "SchoolAffinityRegistryMixin",
-    "MobEffectAccessor"
+    "MobEffectAccessor",
+
+    "celestisynth.BreezebreakerTornadoTerrainMixin",
+    "celestisynth.CrescentiaRangedTerrainMixin",
+    "celestisynth.CrescentiaDragonTerrainMixin"
   ],
   "client": [
     "EldritchResearchScreenMixin"
