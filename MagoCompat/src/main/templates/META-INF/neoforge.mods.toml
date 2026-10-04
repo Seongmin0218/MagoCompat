@@ -11,8 +11,8 @@ authors="Balvenie"
 description='''Mago modpack compatibility patches.
 
 Includes compatibility and balance patches for
-T.O Magic 'n Extras, Cataclysm Spellbooks,
-Iron's Spells 'n Spellbooks, and other Mago systems.
+Cataclysm Spellbooks, Iron's Spells 'n Spellbooks,
+and other Mago systems.
 '''
 
 [[mixins]]
@@ -32,14 +32,6 @@ modId="minecraft"
 type="required"
 versionRange="${minecraft_version_range}"
 ordering="NONE"
-side="BOTH"
-
-
-[[dependencies.${mod_id}]]
-modId="traveloptics"
-type="required"
-versionRange="[0,)"
-ordering="AFTER"
 side="BOTH"
 
 

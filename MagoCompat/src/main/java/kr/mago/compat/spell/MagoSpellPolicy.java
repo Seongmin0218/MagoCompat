@@ -97,8 +97,6 @@ public final class MagoSpellPolicy {
                 "cataclysm_spellbooks:thoths_witness",
                 "cataclysm_spellbooks:conjure_koboldiator",
 
-                "traveloptics:stele_cascade",
-
                 // Sand -> Geo
                 "cataclysm_spellbooks:pharaohs_wrath",
                 "cataclysm_spellbooks:monolith_crash",
@@ -155,8 +153,6 @@ public final class MagoSpellPolicy {
 
                 "hazennstuff:violent_regurgitation",
                 "hazennstuff:bone_bolt",
-
-                "traveloptics:blood_howl",
 
                 "ess_requiem:rip_and_tear",
 
@@ -290,10 +286,6 @@ public final class MagoSpellPolicy {
 
         move(
                 TECHNOMANCY,
-
-                "traveloptics:rapid_laser",
-                "traveloptics:death_laser",
-                "traveloptics:em_pulse",
 
                 "apprenticecodex:commence_fire",
                 "apprenticecodex:quick_arms",
@@ -489,28 +481,7 @@ public final class MagoSpellPolicy {
 
                 // Misc delete
                 "somakespells:pumpkin_bomb",
-                "somakespells:summon_zombie",
-
-                // T.O duplicates / crash spells
-                "traveloptics:aerial_collapse",
-                "traveloptics:ashen_breath",
-                "traveloptics:astral_sense",
-                "traveloptics:axe_of_the_doomed",
-                "traveloptics:blackout",
-                "traveloptics:cursed_revenants",
-                "traveloptics:eternal_sentinel",
-                "traveloptics:ignited_onslaught",
-                "traveloptics:lingering_strain",
-                "traveloptics:mechanized_predator",
-                "traveloptics:psychic_bolt",
-                "traveloptics:reversal",
-                "traveloptics:spectral_blink",
-                "traveloptics:summon_desert_dwellers",
-                "traveloptics:sword_of_the_ancients",
-
-                // Nullflare duplicate:
-                // GTBC kept and moved to Radiance.
-                "traveloptics:nullflare"
+                "somakespells:summon_zombie"
         );
     }
 
