@@ -2,6 +2,7 @@ package kr.mago.compat;
 
 import com.mojang.logging.LogUtils;
 import kr.mago.compat.archer.MagoArcherPolicy;
+import kr.mago.compat.celestisynth.MagoCelestisynthGate;
 import kr.mago.compat.effect.MagoMobEffectPatches;
 import kr.mago.compat.item.MagoCurioAttributeEvents;
 import kr.mago.compat.item.MagoItemAttributeEvents;
@@ -31,6 +32,8 @@ public final class MagoCompat {
         MagoMobEffectPatches.register(modEventBus);
 
         MagoSpellEvents.register();
+
+        MagoCelestisynthGate.register();
 
         LOGGER.info(
                 "[MagoCompat] Mago compatibility patches loaded."
