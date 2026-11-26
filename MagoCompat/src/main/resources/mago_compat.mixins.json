@@ -11,7 +11,8 @@
     "celestisynth.CrescentiaRangedTerrainMixin",
     "celestisynth.CrescentiaDragonTerrainMixin",
   
-    "farmersattributes.EasyHarvestMixin"
+    "farmersattributes.EasyHarvestMixin",
+    "farmersattributes.CrouchBoneMealMixin"
   ],
   "client": [
     "EldritchResearchScreenMixin"
