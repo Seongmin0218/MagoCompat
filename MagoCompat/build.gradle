@@ -102,6 +102,14 @@ dependencies {
     compileOnly files(
         'libs/farmers_attributes-neoforge-1.9.0+mc1.21.1.jar'
     )
+
+    // FTB Chunks
+    compileOnly files(
+        'libs/ftb-chunks-neoforge-2101.1.22.jar',
+        'libs/ftb-library-neoforge-2101.1.35.jar',
+        'libs/ftb-teams-neoforge-2101.1.10.jar'
+    )
+
     compileOnly "io.redspace:irons_spellbooks:${irons_spells_version}"
     compileOnly "io.redspace:irons_lib:${irons_lib_version}"
 
