@@ -98,6 +98,10 @@ configurations {
 }
 
 dependencies {
+    // Farmer's Attributes API
+    compileOnly files(
+        'libs/farmers_attributes-neoforge-1.9.0+mc1.21.1.jar'
+    )
     compileOnly "io.redspace:irons_spellbooks:${irons_spells_version}"
     compileOnly "io.redspace:irons_lib:${irons_lib_version}"
 

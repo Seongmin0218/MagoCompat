@@ -9,7 +9,9 @@
 
     "celestisynth.BreezebreakerTornadoTerrainMixin",
     "celestisynth.CrescentiaRangedTerrainMixin",
-    "celestisynth.CrescentiaDragonTerrainMixin"
+    "celestisynth.CrescentiaDragonTerrainMixin",
+  
+    "farmersattributes.EasyHarvestMixin"
   ],
   "client": [
     "EldritchResearchScreenMixin"
